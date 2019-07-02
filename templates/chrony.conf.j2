@@ -2,15 +2,18 @@
 # See https://chrony.tuxfamily.org/documentation.html for details on this file
 
 {% if chrony_pool %}
-pool {{ chrony_pool }}
-{% endif %}
+{% for pool in chrony_pool %}
+pool {{ pool }} iburst
+{% endfor %}
+{% else %}
 
 {% if chrony_server %}
 server {{ chrony_server }}
 {% endif %}
 
+{% endif %}
+
 keyfile {{ chrony_keyfile }}
-commandkey 1
 
 driftfile {{ chrony_driftfile }}
 log {{ chrony_log }}
